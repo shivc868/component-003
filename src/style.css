@@ -1,0 +1,152 @@
+:root {
+  --text: #08060d;
+  --bg: #fff;
+  --heading: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --sans: "Raleway", "Segoe UI", system-ui, sans-serif;
+
+  color-scheme: light;
+  color: var(--text);
+  background: var(--bg);
+  font-family: var(--sans);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+#app {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.services {
+  display: grid;
+  grid-template-columns: 1fr 1.08fr;
+  gap: 40px;
+  align-items: stretch;
+  height: 100vh;
+  align-content: center;
+}
+
+.services__media {
+  position: relative;
+  margin: 0;
+  height: 95vh;
+  overflow: hidden;
+}
+
+.services__media-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  will-change: clip-path;
+}
+
+.services__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.services__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.services__list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+}
+
+.services__item {
+  background: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  font-family: var(--heading);
+  font-optical-sizing: auto;
+  font-size: clamp(38px, 4.6vw, 55px);
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.services__item.is-active {
+  text-decoration: underline;
+  text-underline-offset: 0.08em;
+  text-decoration-thickness: 3px;
+}
+
+.services__item:first-child {
+  /* trim the half-leading so the cap height aligns with the image top */
+  margin-top: -0.1em;
+}
+
+.services__item:hover:not(.is-active) {
+  opacity: 0.6;
+}
+
+.services__item:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+.services__desc-wrap {
+  position: relative;
+  margin-top: 48px;
+  /* fixed height so in/out descriptions never push the layout around */
+  height: 140px;
+}
+
+.services__desc {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  max-width: 400px;
+  margin: 0;
+  padding-bottom: 14px;
+  font-size: 17px;
+  line-height: 1.32;
+  font-weight: 400;
+  color: var(--text);
+}
+
+@media (max-width: 900px) {
+  #app {
+    padding: 24px 20px;
+  }
+  .services {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    height: auto;
+    min-height: 100vh;
+  }
+  .services__media {
+    height: 55vh;
+  }
+  .services__item {
+    font-size: 44px;
+  }
+  .services__desc-wrap {
+    margin-top: 24px;
+  }
+}
