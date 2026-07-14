@@ -52,6 +52,7 @@ document.querySelector("#app").innerHTML = `
 
   <div class="services__content">
     <nav class="services__list" aria-label="Our services">
+      <span class="services__eyebrow">( Our Services )</span>
       ${services
         .map(
           (s, i) =>

@@ -1,10 +1,15 @@
 :root {
-  --text: #08060d;
-  --bg: #fff;
+  --bg: #0d0c0a;
+  --text: #f3efe6;
+  --soft: rgba(243, 239, 230, 0.72);
+  --muted: rgba(243, 239, 230, 0.38);
+  --accent: #ff5b2e;
   --heading: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --sans: "Raleway", "Segoe UI", system-ui, sans-serif;
+  --mono: "Space Mono", Consolas, monospace;
+  --line: rgba(243, 239, 230, 0.16);
 
-  color-scheme: light;
+  color-scheme: dark;
   color: var(--text);
   background: var(--bg);
   font-family: var(--sans);
@@ -20,6 +25,11 @@
 
 body {
   margin: 0;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
 }
 
 #app {
@@ -67,46 +77,78 @@ body {
 .services__list {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
+  width: 100%;
   margin: 0;
   padding: 0;
+  counter-reset: service;
+}
+
+.services__eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: var(--accent);
+  margin-bottom: 22px;
 }
 
 .services__item {
+  display: flex;
+  align-items: baseline;
+  gap: 28px;
   background: none;
   border: 0;
+  border-top: 1px solid var(--line);
   margin: 0;
-  padding: 0;
+  padding: 16px 0 18px;
   text-align: left;
   font-family: var(--heading);
   font-optical-sizing: auto;
-  font-size: clamp(38px, 4.6vw, 55px);
+  font-size: clamp(38px, 4.2vw, 55px);
   line-height: 1.05;
   font-weight: 700;
   letter-spacing: -0.5px;
-  color: var(--text);
+  color: var(--muted);
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition:
+    color 0.3s ease,
+    padding-left 0.35s ease;
+}
+
+.services__item:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.services__item::before {
+  counter-increment: service;
+  content: counter(service, decimal-leading-zero);
+  flex: none;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  transition: color 0.3s ease;
 }
 
 .services__item.is-active {
-  text-decoration: underline;
-  text-underline-offset: 0.08em;
-  text-decoration-thickness: 3px;
+  color: var(--text);
 }
 
-.services__item:first-child {
-  /* trim the half-leading so the cap height aligns with the image top */
-  margin-top: -0.1em;
+.services__item.is-active::before {
+  color: var(--accent);
 }
 
 .services__item:hover:not(.is-active) {
-  opacity: 0.6;
+  color: var(--soft);
+  padding-left: 16px;
 }
 
 .services__item:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 4px;
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
 }
 
 .services__desc-wrap {
@@ -127,7 +169,7 @@ body {
   font-size: 17px;
   line-height: 1.32;
   font-weight: 400;
-  color: var(--text);
+  color: var(--soft);
 }
 
 @media (max-width: 900px) {
@@ -144,7 +186,8 @@ body {
     height: 55vh;
   }
   .services__item {
-    font-size: 44px;
+    font-size: 36px;
+    gap: 18px;
   }
   .services__desc-wrap {
     margin-top: 24px;
