@@ -1,8 +1,9 @@
 import "./style.css";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(SplitText);
+gsap.registerPlugin(SplitText, ScrollTrigger);
 
 const services = [
   {
@@ -111,6 +112,62 @@ services.forEach((s) => {
 
 let active = 0;
 let currentDesc = document.querySelector(".services__desc");
+
+/* ---------- scroll reveal (plays once) ---------- */
+
+const revealLayer = media.querySelector(".services__media-layer");
+const revealImg = revealLayer.querySelector("img");
+
+// hide everything before the reveal
+gsap.set(revealLayer, { clipPath: "inset(0% 100% 0% 0%)" });
+gsap.set(revealImg, { scale: 1.3 });
+gsap.set(".services__eyebrow", { autoAlpha: 0, y: 24 });
+gsap.set(".services__item", { autoAlpha: 0, y: 64 });
+gsap.set(currentDesc, { autoAlpha: 0 });
+
+function revealDesc() {
+  const p = currentDesc;
+  if (!p) return;
+  const split = new SplitText(p, { type: "lines", mask: "lines" });
+  p._split = split;
+  gsap.set(p, { autoAlpha: 1 });
+  gsap.set(split.lines, { yPercent: 110 });
+  gsap.to(split.lines, {
+    yPercent: 0,
+    duration: 0.7,
+    stagger: 0.07,
+    ease: "power3.out",
+    onComplete: () => {
+      split.revert();
+      delete p._split;
+    },
+  });
+}
+
+function playReveal() {
+  gsap
+    .timeline({ defaults: { ease: "power3.out" } })
+    .to(
+      revealLayer,
+      { clipPath: "inset(0% 0% 0% 0%)", duration: 1, ease: "power3.inOut" },
+      0,
+    )
+    .to(revealImg, { scale: 1, duration: 1.8, ease: "power2.out" }, 0)
+    .to(".services__eyebrow", { autoAlpha: 1, y: 0, duration: 0.6 }, 0.2)
+    .to(
+      ".services__item",
+      { autoAlpha: 1, y: 0, duration: 0.9, stagger: 0.09 },
+      0.3,
+    )
+    .add(revealDesc, 0.65);
+}
+
+ScrollTrigger.create({
+  trigger: ".services",
+  start: "top 65%",
+  once: true,
+  onEnter: playReveal,
+});
 
 function swapImage(service) {
   // each swap gets its own layer stacked on top, so fast clicks just

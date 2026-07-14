@@ -264,7 +264,7 @@ body {
   border: 0;
   border-top: 1px solid var(--line);
   margin: 0;
-  padding: 16px 0 18px;
+  padding: 10px 0 12px;
   text-align: left;
   font-family: var(--heading);
   font-optical-sizing: auto;
