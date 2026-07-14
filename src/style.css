@@ -23,10 +23,6 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   margin: 0;
 }
@@ -195,9 +191,9 @@ body {
 }
 
 #app {
-  max-width: 1400px;
+  width: 92%;
+  max-width: 1920px;
   margin: 0 auto;
-  padding: 0 48px;
 }
 
 .services {
@@ -266,6 +262,7 @@ body {
   margin: 0;
   padding: 10px 0 12px;
   text-align: left;
+  text-decoration: none;
   font-family: var(--heading);
   font-optical-sizing: auto;
   font-size: clamp(38px, 4.2vw, 55px);
@@ -303,9 +300,14 @@ body {
   color: var(--accent);
 }
 
-.services__item:hover:not(.is-active) {
+.services__item:hover,
+.services__item.is-hovered {
+  padding-left: 18px;
+}
+
+.services__item:hover:not(.is-active),
+.services__item.is-hovered:not(.is-active) {
   color: var(--soft);
-  padding-left: 16px;
 }
 
 .services__item:focus-visible {
@@ -313,11 +315,52 @@ body {
   outline-offset: -2px;
 }
 
+.services__footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-top: 48px;
+}
+
 .services__desc-wrap {
   position: relative;
-  margin-top: 48px;
+  flex: 1;
   /* fixed height so in/out descriptions never push the layout around */
   height: 140px;
+}
+
+.services__cta {
+  flex: none;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  overflow: hidden;
+  color: var(--text);
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.services__cta:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+
+.services__cta:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.services__cta svg {
+  width: 24px;
+  height: 24px;
 }
 
 .services__desc {
@@ -336,6 +379,7 @@ body {
 
 @media (max-width: 900px) {
   #app {
+    width: 100%;
     padding: 24px 20px;
   }
   .services {
@@ -351,7 +395,7 @@ body {
     font-size: 36px;
     gap: 18px;
   }
-  .services__desc-wrap {
+  .services__footer {
     margin-top: 24px;
   }
 }

@@ -13,7 +13,102 @@
     <title>component-003</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <section class="spacer" id="top">
+        <span class="spacer__badge">Made for Award</span>
+        <h1 class="spacer__title">Built to <em>win</em></h1>
+        <p class="spacer__text">
+          Every component here is crafted with award-grade precision — the kind
+          of motion that turns heads and earns recognition. Keep scrolling; the
+          section ahead pins in place and reveals each expertise as you move.
+        </p>
+        <div class="spacer__actions">
+          <a class="btn btn--primary" href="#">Get Code</a>
+          <a class="btn btn--ghost" href="#">Back to Collections</a>
+        </div>
+        <div class="spacer__scroll">
+          <span>Scroll</span>
+          <span class="spacer__mouse"></span>
+        </div>
+      </section>
+
+      <section class="services">
+        <figure class="services__media">
+          <div class="services__media-layer">
+            <img
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80"
+              alt="Team planning strategy on a whiteboard with sticky notes"
+            />
+          </div>
+        </figure>
+
+        <div class="services__content">
+          <nav class="services__list" aria-label="Our services">
+            <span class="services__eyebrow">( Our Services )</span>
+            <a
+              class="services__item is-active"
+              href="#strategy"
+              data-index="0"
+              aria-current="true"
+            >
+              Strategy
+            </a>
+            <a class="services__item" href="#brand-identity" data-index="1">
+              Brand Identity
+            </a>
+            <a class="services__item" href="#design" data-index="2">
+              Design
+            </a>
+            <a class="services__item" href="#film" data-index="3">
+              Film
+            </a>
+            <a class="services__item" href="#digital" data-index="4">
+              Digital
+            </a>
+          </nav>
+
+          <div class="services__footer">
+            <div class="services__desc-wrap">
+              <p class="services__desc">
+                We work closely with our clients to uncover what truly defines
+                their brand. Through shared exploration, we find the idea that
+                guides how it speaks and acts.
+              </p>
+            </div>
+            <a
+              class="services__cta"
+              href="#strategy"
+              aria-label="View Strategy service"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M7 17 17 7M9 7h8v8" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="spacer">
+        <span class="spacer__badge">End of Showcase</span>
+        <h2 class="spacer__title">Ready to <em>ship</em></h2>
+        <p class="spacer__text">
+          That's the full expertise reel. Grab the code, drop it into your
+          project, and go make something worth an award.
+        </p>
+        <div class="spacer__actions">
+          <a class="btn btn--primary" href="#">Get Code</a>
+          <a class="btn btn--ghost" href="#top">Back to Top</a>
+        </div>
+      </section>
+    </div>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
