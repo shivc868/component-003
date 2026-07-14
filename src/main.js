@@ -43,6 +43,24 @@ const services = [
 ];
 
 document.querySelector("#app").innerHTML = `
+<section class="spacer" id="top">
+  <span class="spacer__badge">Made for Award</span>
+  <h1 class="spacer__title">Built to <em>win</em></h1>
+  <p class="spacer__text">
+    Every component here is crafted with award-grade precision — the kind of
+    motion that turns heads and earns recognition. Keep scrolling; the section
+    ahead pins in place and reveals each expertise as you move.
+  </p>
+  <div class="spacer__actions">
+    <a class="btn btn--primary" href="#">Get Code</a>
+    <a class="btn btn--ghost" href="#">Back to Collections</a>
+  </div>
+  <div class="spacer__scroll">
+    <span>Scroll</span>
+    <span class="spacer__mouse"></span>
+  </div>
+</section>
+
 <section class="services">
   <figure class="services__media">
     <div class="services__media-layer">
@@ -64,6 +82,19 @@ document.querySelector("#app").innerHTML = `
     <div class="services__desc-wrap">
       <p class="services__desc">${services[0].desc}</p>
     </div>
+  </div>
+</section>
+
+<section class="spacer">
+  <span class="spacer__badge">End of Showcase</span>
+  <h2 class="spacer__title">Ready to <em>ship</em></h2>
+  <p class="spacer__text">
+    That's the full expertise reel. Grab the code, drop it into your project,
+    and go make something worth an award.
+  </p>
+  <div class="spacer__actions">
+    <a class="btn btn--primary" href="#">Get Code</a>
+    <a class="btn btn--ghost" href="#top">Back to Top</a>
   </div>
 </section>
 `;
