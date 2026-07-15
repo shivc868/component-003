@@ -72,6 +72,27 @@ let currentDesc = document.querySelector(".services__desc");
 
 const cta = document.querySelector(".services__cta");
 const ctaArrow = cta.querySelector("svg");
+const indicator = document.querySelector(".services__indicator");
+
+// glide the single white strip over a title row; mix-blend-mode: difference
+// inverts the covered row, so its text flips dark automatically
+function moveStrip(index, instant = false) {
+  const item = buttons[index];
+  const props = { y: item.offsetTop, height: item.offsetHeight };
+  if (instant) gsap.set(indicator, props);
+  else
+    gsap.to(indicator, {
+      ...props,
+      duration: 0.4,
+      ease: "power3.out",
+      overwrite: true,
+    });
+}
+
+// row heights depend on fonts/viewport, so re-anchor the strip when they settle
+window.addEventListener("load", () => moveStrip(active, true));
+window.addEventListener("resize", () => moveStrip(active, true));
+moveStrip(0, true);
 
 function swapArrow() {
   // redirect any in-flight swap from its current position — no snapping
@@ -93,6 +114,7 @@ gsap.set(revealLayer, { clipPath: "inset(0% 100% 0% 0%)" });
 gsap.set(revealImg, { scale: 1.3 });
 gsap.set(".services__eyebrow", { autoAlpha: 0, y: 24 });
 gsap.set(".services__item", { autoAlpha: 0, y: 64 });
+gsap.set(indicator, { autoAlpha: 0 });
 gsap.set(currentDesc, { autoAlpha: 0 });
 gsap.set(cta, { autoAlpha: 0, scale: 0.6 });
 
@@ -106,7 +128,7 @@ function revealDesc() {
   gsap.to(split.lines, {
     yPercent: 0,
     duration: 0.7,
-    stagger: 0.07,
+    // stagger: 0.07,
     ease: "power3.out",
     onComplete: () => {
       split.revert();
@@ -130,8 +152,14 @@ function playReveal() {
       { autoAlpha: 1, y: 0, duration: 0.9, stagger: 0.09 },
       0.3,
     )
+    .add(() => moveStrip(active, true), 0.3)
+    .to(indicator, { autoAlpha: 1, duration: 0.5 }, 0.9)
     .add(revealDesc, 0.65)
-    .to(cta, { autoAlpha: 1, scale: 1, duration: 0.6, ease: "back.out(1.6)" }, 0.8);
+    .to(
+      cta,
+      { autoAlpha: 1, scale: 1, duration: 0.6, ease: "back.out(1.6)" },
+      0.8,
+    );
 }
 
 ScrollTrigger.create({
@@ -179,7 +207,7 @@ function swapDesc(text) {
     gsap.to(oldSplit.lines, {
       yPercent: -110,
       duration: 0.2,
-      stagger: 0.035,
+      // stagger: 0.035,
       ease: "none",
       onComplete: () => oldDesc.remove(),
     });
@@ -225,6 +253,7 @@ function setActive(index) {
   swapImage(service);
   swapDesc(service.desc);
   swapArrow();
+  moveStrip(index);
 }
 
 const list = document.querySelector(".services__list");

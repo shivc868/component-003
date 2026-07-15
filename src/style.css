@@ -233,6 +233,7 @@ body {
 }
 
 .services__list {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -256,19 +257,16 @@ body {
   display: flex;
   align-items: baseline;
   gap: 28px;
-  background: none;
-  border: 0;
   border-top: 1px solid var(--line);
-  margin: 0;
   padding: 10px 0 12px;
   text-align: left;
   text-decoration: none;
   font-family: var(--heading);
   font-optical-sizing: auto;
-  font-size: clamp(38px, 4.2vw, 55px);
+  font-size: clamp(38px, 4.2vw, 42px);
   line-height: 1.05;
-  font-weight: 700;
-  letter-spacing: -0.5px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
   color: var(--muted);
   cursor: pointer;
   transition:
@@ -276,8 +274,21 @@ body {
     padding-left 0.35s ease;
 }
 
-.services__item:last-child {
+.services__item:last-of-type {
   border-bottom: 1px solid var(--line);
+}
+
+.services__indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90px; /* real height set per-row by JS */
+  background: #fff;
+  /* inverts whatever it covers: dark bg -> white, light text -> dark */
+  mix-blend-mode: difference;
+  pointer-events: none;
+  will-change: transform;
 }
 
 .services__item::before {
@@ -338,7 +349,7 @@ body {
   width: 64px;
   height: 64px;
   border: 1px solid var(--line);
-  border-radius: 50%;
+  border-radius: 0;
   overflow: hidden;
   color: var(--text);
   transition:
@@ -368,10 +379,10 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  max-width: 400px;
+  max-width: 440px;
   margin: 0;
-  padding-bottom: 14px;
-  font-size: 17px;
+  font-family: "Manrope", "Segoe UI", system-ui, sans-serif;
+  font-size: 20px;
   line-height: 1.32;
   font-weight: 400;
   color: var(--soft);
