@@ -1,5 +1,6 @@
 import "./style.css";
 import "./demo.css"; // showcase page styles only — do NOT copy into your project
+import "./spacer.css"; // showcase spacer sections only — do NOT copy into your project
 import "lenis/dist/lenis.css";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
@@ -76,7 +77,7 @@ const services = [
 /* ---------------------------------------------------------------------------
    Services section
 
-   Everything lives inside gsap.context() scoped to the .services element:
+   Everything lives inside gsap.context() scoped to the .mfa-services element:
    - selector strings in tweens only match INSIDE this section, so they can
      never touch the host site's own elements or animations
    - the returned cleanup() reverts every tween/ScrollTrigger and removes
@@ -84,7 +85,7 @@ const services = [
 --------------------------------------------------------------------------- */
 
 function initServices() {
-  const section = document.querySelector(".services");
+  const section = document.querySelector(".mfa-services");
   if (!section) return () => {};
 
   // every listener is registered through this helper so cleanup can undo it
@@ -95,13 +96,13 @@ function initServices() {
   };
 
   const ctx = gsap.context(() => {
-    const media = section.querySelector(".services__media");
-    const descWrap = section.querySelector(".services__desc-wrap");
-    const list = section.querySelector(".services__list");
-    const buttons = [...section.querySelectorAll(".services__item")];
-    const cta = section.querySelector(".services__cta");
+    const media = section.querySelector(".mfa-services__media");
+    const descWrap = section.querySelector(".mfa-services__desc-wrap");
+    const list = section.querySelector(".mfa-services__list");
+    const buttons = [...section.querySelectorAll(".mfa-services__item")];
+    const cta = section.querySelector(".mfa-services__cta");
     const ctaArrow = cta.querySelector("svg");
-    const indicator = section.querySelector(".services__indicator");
+    const indicator = section.querySelector(".mfa-services__indicator");
 
     // preload every image so switching feels instant
     services.forEach((s) => {
@@ -110,7 +111,7 @@ function initServices() {
     });
 
     let active = 0;
-    let currentDesc = section.querySelector(".services__desc");
+    let currentDesc = section.querySelector(".mfa-services__desc");
 
     /* ---------- white strip indicator ---------- */
 
@@ -148,14 +149,14 @@ function initServices() {
 
     /* ---------- scroll reveal (plays once) ---------- */
 
-    const revealLayer = media.querySelector(".services__media-layer");
+    const revealLayer = media.querySelector(".mfa-services__media-layer");
     const revealImg = revealLayer.querySelector("img");
 
     // hide everything before the reveal
     gsap.set(revealLayer, { clipPath: "inset(50%)" });
     gsap.set(revealImg, { scale: 1.3 });
-    gsap.set(".services__eyebrow", { autoAlpha: 0, y: 24 });
-    gsap.set(".services__item", { autoAlpha: 0, y: 64 });
+    gsap.set(".mfa-services__eyebrow", { autoAlpha: 0, y: 24 });
+    gsap.set(".mfa-services__item", { autoAlpha: 0, y: 64 });
     gsap.set(indicator, { autoAlpha: 0 });
     gsap.set(currentDesc, { autoAlpha: 0 });
     gsap.set(cta, { autoAlpha: 0, scale: 0.6 });
@@ -188,9 +189,13 @@ function initServices() {
           0,
         )
         .to(revealImg, { scale: 1, duration: 1.8, ease: "power2.out" }, 0)
-        .to(".services__eyebrow", { autoAlpha: 1, y: 0, duration: 0.6 }, 0.2)
         .to(
-          ".services__item",
+          ".mfa-services__eyebrow",
+          { autoAlpha: 1, y: 0, duration: 0.6 },
+          0.2,
+        )
+        .to(
+          ".mfa-services__item",
           { autoAlpha: 1, y: 0, duration: 0.9, stagger: 0.09 },
           0.3,
         )
@@ -217,7 +222,7 @@ function initServices() {
       // each swap gets its own layer stacked on top, so fast clicks just
       // produce overlapping reveals instead of cancelled/broken ones
       const layer = document.createElement("div");
-      layer.className = "services__media-layer";
+      layer.className = "mfa-services__media-layer";
       const img = new Image();
       img.src = service.image;
       img.alt = service.alt;
@@ -260,7 +265,7 @@ function initServices() {
       }
 
       const p = document.createElement("p");
-      p.className = "services__desc";
+      p.className = "mfa-services__desc";
       p.textContent = text;
       descWrap.appendChild(p);
 
@@ -290,7 +295,7 @@ function initServices() {
       active = index;
 
       buttons.forEach((btn, i) => {
-        btn.classList.toggle("is-active", i === index);
+        btn.classList.toggle("mfa-is-active", i === index);
         if (i === index) btn.setAttribute("aria-current", "true");
         else btn.removeAttribute("aria-current");
       });
@@ -305,7 +310,7 @@ function initServices() {
     }
 
     on(list, "click", (e) => {
-      const btn = e.target.closest(".services__item");
+      const btn = e.target.closest(".mfa-services__item");
       if (btn) setActive(Number(btn.dataset.index));
     });
 
@@ -320,15 +325,15 @@ function initServices() {
 
     function setHovered(btn) {
       if (btn === hovered) return;
-      if (hovered) hovered.classList.remove("is-hovered");
+      if (hovered) hovered.classList.remove("mfa-is-hovered");
       hovered = btn;
-      if (hovered) hovered.classList.add("is-hovered");
+      if (hovered) hovered.classList.add("mfa-is-hovered");
     }
 
     function updateHover() {
       if (pointerX < 0) return;
       const el = document.elementFromPoint(pointerX, pointerY);
-      let btn = el ? el.closest(".services__item") : null;
+      let btn = el ? el.closest(".mfa-services__item") : null;
       // ignore matches outside this section — the host site may happen to
       // use the same class name elsewhere
       if (btn && !section.contains(btn)) btn = null;

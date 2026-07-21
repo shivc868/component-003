@@ -1,46 +1,39 @@
 /* ==========================================================================
    SERVICES COMPONENT — this is the file you copy into your project
    --------------------------------------------------------------------------
-   Contains the design tokens (:root) and every style the component needs.
+   Every class, state class and design token is namespaced with `mfa-` /
+   `--mfa-` so nothing here can collide with the styles already on your site.
    The showcase page around it (spacers, buttons, page container) lives in
    demo.css and should NOT be copied.
    ========================================================================== */
 
 :root {
-  --bg: #0d0c0a;
-  --text: #f3efe6;
-  --soft: rgba(243, 239, 230, 0.72);
-  --muted: rgba(243, 239, 230, 0.38);
-  --accent: #ff5b2e;
-  --heading: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  --sans: "Raleway", "Segoe UI", system-ui, sans-serif;
-  --mono: "Space Mono", Consolas, monospace;
-  --line: rgba(243, 239, 230, 0.16);
+  --mfa-bg: #0d0c0a;
+  --mfa-text: #f3efe6;
+  --mfa-soft: rgba(243, 239, 230, 0.72);
+  --mfa-muted: rgba(243, 239, 230, 0.38);
+  --mfa-accent: #ff5b2e;
+  --mfa-heading: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --mfa-sans: "Raleway", "Segoe UI", system-ui, sans-serif;
+  --mfa-mono: "Space Mono", Consolas, monospace;
+  --mfa-line: rgba(243, 239, 230, 0.16);
+}
 
+.mfa-services,
+.mfa-services * {
+  box-sizing: border-box;
+}
+
+.mfa-services {
   color-scheme: dark;
-  color: var(--text);
-  background: var(--bg);
-  font-family: var(--sans);
+  color: var(--mfa-text);
+  background: var(--mfa-bg);
+  font-family: var(--mfa-sans);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-}
-
-::selection {
-  background: var(--accent);
-  color: var(--bg);
-}
-
-.services {
   display: grid;
   grid-template-columns: 1fr 1.08fr;
   gap: 40px;
@@ -49,34 +42,39 @@ body {
   align-content: center;
 }
 
-.services__media {
+.mfa-services ::selection {
+  background: var(--mfa-accent);
+  color: var(--mfa-bg);
+}
+
+.mfa-services__media {
   position: relative;
   margin: 0;
   height: 95vh;
   overflow: hidden;
 }
 
-.services__media-layer {
+.mfa-services__media-layer {
   position: absolute;
   inset: 0;
   overflow: hidden;
   will-change: clip-path;
 }
 
-.services__media img {
+.mfa-services__media img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.services__content {
+.mfa-services__content {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.services__list {
+.mfa-services__list {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -84,45 +82,45 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  counter-reset: service;
+  counter-reset: mfa-service;
 }
 
-.services__eyebrow {
-  font-family: var(--mono);
+.mfa-services__eyebrow {
+  font-family: var(--mfa-mono);
   font-size: 11px;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.28em;
-  color: var(--accent);
+  color: var(--mfa-accent);
   margin-bottom: 22px;
 }
 
-.services__item {
+.mfa-services__item {
   display: flex;
   align-items: baseline;
   gap: 28px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--mfa-line);
   padding: 10px 0 12px;
   text-align: left;
   text-decoration: none;
-  font-family: var(--heading);
+  font-family: var(--mfa-heading);
   font-optical-sizing: auto;
   font-size: clamp(38px, 4.2vw, 42px);
   line-height: 1.05;
   font-weight: 500;
   letter-spacing: -0.04em;
-  color: var(--muted);
+  color: var(--mfa-muted);
   cursor: pointer;
   transition:
     color 0.3s ease,
     padding-left 0.35s ease;
 }
 
-.services__item:last-of-type {
-  border-bottom: 1px solid var(--line);
+.mfa-services__item:last-of-type {
+  border-bottom: 1px solid var(--mfa-line);
 }
 
-.services__indicator {
+.mfa-services__indicator {
   position: absolute;
   top: 0;
   left: 0;
@@ -135,42 +133,42 @@ body {
   will-change: transform;
 }
 
-.services__item::before {
-  counter-increment: service;
-  content: counter(service, decimal-leading-zero);
+.mfa-services__item::before {
+  counter-increment: mfa-service;
+  content: counter(mfa-service, decimal-leading-zero);
   flex: none;
-  font-family: var(--mono);
+  font-family: var(--mfa-mono);
   font-size: 12px;
   font-weight: 400;
   letter-spacing: 0.12em;
-  color: var(--muted);
+  color: var(--mfa-muted);
   transition: color 0.3s ease;
 }
 
-.services__item.is-active {
-  color: var(--text);
+.mfa-services__item.mfa-is-active {
+  color: var(--mfa-text);
 }
 
-.services__item.is-active::before {
-  color: var(--accent);
+.mfa-services__item.mfa-is-active::before {
+  color: var(--mfa-accent);
 }
 
-.services__item:hover,
-.services__item.is-hovered {
+.mfa-services__item:hover,
+.mfa-services__item.mfa-is-hovered {
   padding-left: 18px;
 }
 
-.services__item:hover:not(.is-active),
-.services__item.is-hovered:not(.is-active) {
-  color: var(--soft);
+.mfa-services__item:hover:not(.mfa-is-active),
+.mfa-services__item.mfa-is-hovered:not(.mfa-is-active) {
+  color: var(--mfa-soft);
 }
 
-.services__item:focus-visible {
-  outline: 2px solid var(--accent);
+.mfa-services__item:focus-visible {
+  outline: 2px solid var(--mfa-accent);
   outline-offset: -2px;
 }
 
-.services__footer {
+.mfa-services__footer {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -178,47 +176,47 @@ body {
   margin-top: 48px;
 }
 
-.services__desc-wrap {
+.mfa-services__desc-wrap {
   position: relative;
   flex: 1;
   /* fixed height so in/out descriptions never push the layout around */
   height: 140px;
 }
 
-.services__cta {
+.mfa-services__cta {
   flex: none;
   position: relative;
   display: grid;
   place-items: center;
   width: 64px;
   height: 64px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--mfa-line);
   border-radius: 0;
   overflow: hidden;
-  color: var(--text);
+  color: var(--mfa-text);
   transition:
     background 0.3s ease,
     border-color 0.3s ease,
     color 0.3s ease;
 }
 
-.services__cta:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--bg);
+.mfa-services__cta:hover {
+  background: var(--mfa-accent);
+  border-color: var(--mfa-accent);
+  color: var(--mfa-bg);
 }
 
-.services__cta:focus-visible {
-  outline: 2px solid var(--accent);
+.mfa-services__cta:focus-visible {
+  outline: 2px solid var(--mfa-accent);
   outline-offset: 3px;
 }
 
-.services__cta svg {
+.mfa-services__cta svg {
   width: 24px;
   height: 24px;
 }
 
-.services__desc {
+.mfa-services__desc {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -229,43 +227,43 @@ body {
   font-size: 20px;
   line-height: 1.32;
   font-weight: 400;
-  color: var(--soft);
+  color: var(--mfa-soft);
 }
 
 /* tablets */
 @media (max-width: 900px) {
-  .services {
+  .mfa-services {
     grid-template-columns: 1fr;
     gap: 32px;
     height: auto;
     min-height: 100vh;
   }
-  .services__media {
+  .mfa-services__media {
     height: 55vh;
   }
-  .services__item {
+  .mfa-services__item {
     font-size: 36px;
     gap: 18px;
   }
-  .services__footer {
+  .mfa-services__footer {
     margin-top: 24px;
   }
 }
 
 /* phones: just tighter type, everything else stays as-is */
 @media (max-width: 640px) {
-  .services__item {
+  .mfa-services__item {
     font-size: 28px;
     gap: 14px;
   }
-  .services__desc {
+  .mfa-services__desc {
     font-size: 13px;
   }
-  .services__cta {
+  .mfa-services__cta {
     width: 40px;
     height: 40px;
   }
-  .services__cta svg {
+  .mfa-services__cta svg {
     width: 16px;
     height: 16px;
   }
