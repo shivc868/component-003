@@ -1,6 +1,5 @@
 import "./style.css";
 import "./demo.css"; // showcase page styles only — do NOT copy into your project
-import "./spacer.css"; // showcase spacer sections only — do NOT copy into your project
 import "lenis/dist/lenis.css";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
@@ -231,7 +230,7 @@ function initServices() {
 
       // the new image expands out of the center over the old one
       gsap.set(layer, { clipPath: "inset(50%)" });
-      gsap.set(img, { scale: 1.25 });
+      gsap.set(img, { scale: 1.5 });
 
       gsap
         .timeline({
@@ -241,7 +240,15 @@ function initServices() {
               layer.previousElementSibling.remove();
           },
         })
-        .to(layer, { clipPath: "inset(0%)", duration: 1, ease: "circ.out" }, 0)
+        .to(
+          layer,
+          {
+            clipPath: "inset(0%)",
+            duration: 0.7,
+            ease: "expoScale(0.5,7,power2.inOut)",
+          },
+          0,
+        )
         .to(img, { scale: 1, duration: 1, ease: "power2.out" }, 0);
     }
 
