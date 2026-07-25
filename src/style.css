@@ -50,7 +50,8 @@
 .mfa-services__media {
   position: relative;
   margin: 0;
-  height: 95vh;
+  height: 80vh;
+  align-self: center;
   overflow: hidden;
 }
 
@@ -83,6 +84,10 @@
   margin: 0;
   padding: 0;
   counter-reset: mfa-service;
+  /* confine the strip's difference-blend to this group so it always inverts
+     the rows beneath it — without this the blend backdrop is undefined and
+     the strip renders as a flat grey box or vanishes entirely */
+  isolation: isolate;
 }
 
 .mfa-services__eyebrow {
